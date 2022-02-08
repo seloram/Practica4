@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const CryptoJS = require("crypto-js");
 
 mongoose.connect(
-    'mongodb://51.254.124.54:27017/FilmEsV3',
+    'mongodb://localhost:27017/FilmEsV3',
     {useNewUrlParser:true, useUnifiedTopology:true}
 );
 
