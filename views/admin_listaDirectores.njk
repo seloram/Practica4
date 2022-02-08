@@ -1,0 +1,38 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Director | Añadir{% endblock %}
+
+{% block contenido %}
+
+    <h1>Modificar directores</h1>
+
+    <table width="100%">
+        {% for director in directores %}
+            <tr>
+                {% if loop.index % 2 == 0 %}
+                    <td class="par">{{ director.nombre }}</td>
+                {% else %}
+                    <td class="impar">{{ director.nombre }}</td>
+                {% endif %}
+                <td>
+                    {% if loop.index % 2 == 0 %}
+                        <td class="par">{{ director.nacimiento }}</td>
+                    {% else %}
+                        <td class="impar">{{ director.nacimiento }}</td>
+                    {% endif %}
+                </td>
+                <td>     
+                    <form style="display:inline" action="/admin/directores/borrar/{{ director.id }}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+                    <a class="btn btn-primary" href="/admin/director/editar/{{ director.id }}">Editar</a>                    
+                </td>
+            </tr>
+        {% else %}
+            <tr><td>No hay directores que mostrar.</td></tr>
+        {% endfor %}
+        <tr><a class="btn btn-secondary directores" href="/admin/director/nuevo">Añadir un director</a><tr>
+    </table>
+
+{% endblock %}

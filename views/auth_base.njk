@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block titulo %} {% endblock %}</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/public/css/estilos.css"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="alert alert-secondary">
+
+                {% if (session and session.login) %}                
+                    <a class="btn btn-dark" href="/auth/logout">Logout</a>
+                {% else %}
+                    <a class="btn btn-dark" href="/auth/login">Login</a>
+                {% endif %}
+            </div>
+            {% block contenido %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

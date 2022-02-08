@@ -1,0 +1,49 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Director | Añadir{% endblock %}
+
+{% block contenido %}
+    {% if(director)%}
+    <h1>Modificar director {{director.nombre}}</h1>
+    {% else %}
+    <h1>Añadir directores</h1>
+    {%endif%}
+    {% if (director) %}       
+        <form action="/admin/directores/modificacion/{{director.id}}" method="post" >   
+           <input type="hidden" name="_method" value="put" />
+    {% else %}
+        <form action="/admin/directores" method="post" >   
+    {% endif %}
+           <table width="100%">
+           <tr>
+           <td class="columna1">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                {% if (director) %}
+                    <input class="campoDirector" type="text"  class="form-control" name="nombre" 
+                        value="{{director.nombre}}"/>
+                {%else%}
+                    <input class="campoDirector" type="text" class="form-control" name="nombre" 
+                     placeholder="Nombre del director..."/>
+                {% endif %}                
+            </div>
+            </td>
+            <td class="columna2">
+            <div class="form-group">
+                <label for="nacimiento">Nacimiento:</label>
+                {% if (director) %}
+                    <input class="campoDirector" type="date"  class="form-control" name="nacimiento" 
+                        value="{{director.nacimiento}}"/>
+                {%else%}
+                    <input class="campoDirector" type="date" class="form-control" name="nacimiento" 
+                        placeholder="Fecha de su nacimiento..."/>
+                {% endif %}
+            </div>
+            </td>
+            <tr>
+            </table>
+            <button id="director" type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+
+
+{% endblock %}

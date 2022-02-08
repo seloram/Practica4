@@ -1,0 +1,34 @@
+{% extends "public_base.njk" %}
+
+{% block titulo %}Película | Ficha{% endblock %}
+
+{% block contenido %}
+
+    <h1>Ficha de la película</h1>
+    <div>
+        <p><strong>Título:</strong> {{ pelicula.titulo }}</p>
+        <p><strong>Sinopsis:</strong> {{ pelicula.sinopsis }}</p>
+        <p><strong>Duración:</strong> {{ pelicula.duracion }}</p>
+        <p><strong>Genero:</strong> {{ pelicula.genero }}</p>
+        <p><strong>Valoración:</strong> {{ pelicula.valoracion }}</p>
+        <p><strong>Plataformas:</strong></p>
+        <div  > 
+         {% for plataforma in pelicula.plataforma %}
+         <tr>
+            <p class="plataformas"> {{plataforma.nombre}}</p>
+         </tr>
+         {% endfor %}
+        </div>
+        <div > 
+        <p><strong>Directores:</strong></p>
+        {% for director in pelicula.director %}
+         <tr>
+            <p class="directores"> {{director.nombre}}</p>
+         </tr>
+         {% endfor %}
+        </div>
+
+        <p>Imagen: <img src="/public/uploads/{{ pelicula.imagen }}" width="30%" /></p>
+    </div>
+
+{% endblock %}

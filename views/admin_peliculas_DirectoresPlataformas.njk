@@ -1,0 +1,50 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Películas | Directores{% endblock %}
+
+{% block contenido %}
+ {% if pelicula %}
+    <h1>Listado de directores de {{pelicula.titulo}}</h1>
+    
+    <table width="100%">
+
+        {% for director in pelicula.director %}
+            <tr>
+            <td>
+                    <form style="display:inline" action="/admin/peliculas/directores/borrar/{{ pelicula.id }}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        
+                        <label type="text" value="{{director.id}}"  class="form-control campoDirector" name="nombre">{{director.nombre}}</label>
+                        <input type="text"  class="form-control campoDirector d-none"   value="{{director.id}}" name="directorId"></input>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+             
+            </td>               
+        
+            </tr>
+        {%endfor%}
+    </table>
+ {% else %}
+     <h1>Listado de plataformas de {{peliculaPlataforma.titulo}}</h1>
+    
+    <table width="100%">
+
+        {% for plataforma in peliculaPlataforma.plataforma %}
+            <tr>
+            <td>
+                    <form style="display:inline" action="/admin/peliculas/plataformas/borrar/{{ peliculaPlataforma.id }}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        
+                        <label type="text" value="{{plataforma.id}}"  class="form-control campoDirector" name="nombre">{{plataforma.nombre}}</label>
+                        <input type="text"  class="form-control campoDirector d-none"   value="{{plataforma.id}}" name="plataformaId"></input>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+             
+            </td>               
+        
+            </tr>
+        {%endfor%}
+    </table>
+ {% endif %}
+
+{% endblock %}

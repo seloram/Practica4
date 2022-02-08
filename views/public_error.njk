@@ -1,0 +1,10 @@
+{% extends "admin_base.njk" %}
+{% block titulo %}Public | Error{% endblock %}
+{% block contenido %}
+
+     {% if (error) %}
+         <h3> {{error}}</h3>
+     {% else %}
+        <div class="alert alert-danger">Error en la aplicación</div>
+     {% endif %}
+{% endblock %}

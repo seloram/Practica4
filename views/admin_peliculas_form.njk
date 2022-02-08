@@ -1,0 +1,189 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Películas | Editar{% endblock %}
+
+{% block contenido %}
+   {% if (pelicula) %}
+    <h1>Edición de películas</h1>
+    {%else%}
+           <h1>Añadir película</h1>
+        {%endif%}
+
+    {% if (pelicula) %}
+        <form action="/admin/peliculas/{{pelicula.resultado.id}}" method="post" enctype="multipart/form-data">
+      
+    {% else %}
+            <form action="/admin/peliculas" method="post" enctype="multipart/form-data">
+    {% endif %}    
+            <table style="width: 100%;">
+                <tr>
+
+                    <td style="width: 50%;">            <div class="form-group">
+                        <label for="titulo">Título:</label>
+                        {% if (pelicula) %}
+                            <input type="text" class="form-control" name="titulo" 
+                             placeholder="Título de la película..." value="{{ pelicula.resultado.titulo }}"/>
+                        {% else %}
+                            <input type="text" class="form-control" name="titulo"
+                                placeholder="Título de la película..."/>
+                        {%endif%}
+                    </div></td>
+                    <td style="width: 50%;">            <div class="form-group">
+                        <label for="sinopsis">Sinopsis:</label>
+                                  {% if (pelicula) %}
+                        <input type="text" class="form-control" name="sinopsis" 
+                         value="{{ pelicula.resultado.sinopsis }}"/>
+                               {% else %}
+                        <input type="text" class="form-control" name="sinopsis" 
+                            placeholder="Sinopsis de la película..."/>
+                                 {%endif%}
+                    </div></td>
+                </tr>
+                <tr>
+
+                    <td style="width: 50%;">            <div class="form-group input">
+                        <label for="duracion">Duración:</label>
+        
+                            {% if (pelicula) %}
+                                <input type="text" class="form-control" name="duracion" 
+                                    value="{{pelicula.resultado.duracion}}" />
+                            {% else %}
+                                <input type="text" class="form-control" name="duracion" 
+                                    placeholder="sinopsis de la película..." />
+                            {%endif%}
+                    </div>  </td>
+                    <td style="width: 50%;">            <div class="form-group input">
+                        <label for="genero">Genero:</label>
+                             {% if (pelicula) %}
+                                <input type="text" class="form-control" name="genero"
+                                 value="{{pelicula.resultado.genero}}"/>
+                            {% else %}
+                                <input type="text" class="form-control" name="genero"
+                                    placeholder="Gnero de la película..."/>
+                            {%endif%}
+                    </div></td>
+                </tr>
+               <tr>
+
+                    <td style="background-color: antiquewhite;">            <div class="form-group input">
+                        <label for="imagen">Poster:</label>
+                        {% if (pelicula) %}
+                            <img src="/public/uploads/{{pelicula.resultado.imagen}}" alt="" width="30%">                  
+                        {%endif%}
+                          <input type="file" class="form-control"  name="imagen"/>
+                    </div></td>
+                    <td>            <div class="form-group input">
+                        <label for="valoracion">Valoración:</label>
+                        {% if (pelicula) %}
+                            <input type="number" class="form-control" name="valoracion"
+                                value="{{pelicula.resultado.valoracion}}" />
+                        {% else %}
+                            <input type="number" class="form-control" name="valoracion"
+                                placeholder="Valora la la película..." />
+                        {%endif%}
+                    </div></td>
+                </tr>
+
+            </table>
+            
+
+
+            <p><strong>Plataformas:</strong></p>
+            <table style="width: 100%; background-color: antiquewhite;" cellspacing="0">
+                <tr>
+                    <td class="columna1">
+                        <p>
+                            {%if (pelicula.resultado.plataforma.length > 0) %}
+                                {% for plataforma in pelicula.resultado.plataforma %}
+                                        <div style="border:1px solid black; background-color: rgb(247, 195, 128);">
+                                        <p style="font-weight:boder;" id="plataformas">{{plataforma.nombre}}</p>
+                                        {% if (plataforma.cantidad) %}
+                                        <p style="font-weight:boder;">Abonado</p>
+                                        {%else%}
+                                         <p style="font-weight:boder;">No Abonado</p>
+                                     
+                                        {%endif%}
+                                    </div>
+                                {% endfor %}
+                            <a class="btn btn-danger" href="/admin/peliculas/plataformas/{{pelicula.resultado.id}}">
+                                                        Borrar una plataforma</a>
+                        </p>
+                            {% else %}
+                                <p class="plataformas"> No hay plataformas asignadas aún </p>
+                            {% endif %}
+                    </td>
+                    <td class="columna2">
+                        <div class="form-group">
+                            <label for="nombrePlataforma">Introducir nueva plataforma:</label>
+                            <input type="text" class="form-control" name="nombrePlataforma"
+                                    placeholder="Nombre de la plataforma.." />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechaCaducidad">Fecha de subscripción:</label>
+                            <input type="date" class="form-control" name="fechaCaducidad"/>
+                        </div>
+         
+                        <div class="form-group">
+                            <input type="checkbox" name="abonar">
+                            <label for="abonar"> Abonado?</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <p><strong>Directores:</strong></p>
+            <table style="width: 100%; background-color: antiquewhite;" cellspacing="0">
+                <tr>
+                    <td class="columna1">
+                        <p>
+                        {%if (pelicula.resultado.director.length>0) %}
+                            {% for director in pelicula.resultado.director %}
+                         
+                                <p id="directores"> {{director.nombre}}</p>                        
+                        
+                            {% endfor %}
+                             <a class="btn btn-danger" href="/admin/peliculas/directores/{{pelicula.resultado.id}}">Borrar un director</a>
+                        </p>
+                        {% else %}
+                           <p class="plataformas"> No hay directores asignados aún </p>
+                        {% endif %}
+                    </td>
+                    <td  class="columna2">
+  
+                        {% if (pelicula.resultado)%}
+                        <div class="form-group input">
+                            <label for="nuevoDirector">Introducir nuevo director:</label>
+                            <select name="director">
+                                {% for director in pelicula.directores %}
+                                    <option value="{{director.id}}"  >{{ director.nombre }}</option>
+                                {%endfor%}
+                                 <option  selected="seleccione un director"></option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {%else%}
+                        <div class="form-group input">
+                        <label for="nuevoDirector">Introducir nuevo director:</label>
+                        <select name="director">
+                            {% for director in directores %}
+                                <option value="{{director.id}}"  >{{ director.nombre }}</option>
+                            {%endfor%}
+                                <option  selected="seleccione un director"></option>
+                        </select>
+                    </div>
+                    {%endif%}
+                    </td>
+                </tr>
+            </table>
+            
+       
+     
+
+            <button type="submit" class="btn btn-primary aceptar">Aceptar</button>
+        </form>
+  
+
+{% endblock %}

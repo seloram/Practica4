@@ -1,0 +1,65 @@
+.par{
+    background-color: rgb(189, 188, 188);
+    color: black;
+    font-weight: bolder;
+}
+.impar{
+    background-color: wheat;
+    color: black;
+    font-weight: bolder;
+}
+
+#plataformas{
+    margin: 20px;
+    font-weight: bolder;
+}
+
+
+#directores{
+    margin: 20px;
+    font-weight: bolder;
+}
+
+#nombreDirector, #nacimientoDirector{
+    margin:20px;
+    width: 400px;
+}
+
+#login, #password{
+    margin:20px;
+    width: 400px;
+}
+
+.aceptar{
+    margin-top:20px;
+}
+
+.input{
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+#dirButton{
+    margin-bottom: 10px;
+}
+
+.columna1{
+    width: 50%;
+}
+.columna2{
+    margin-left: 200px;
+    width: 50%;
+}
+
+#director{
+    margin-top:30px;
+}
+
+.campoDirector{
+    width: 300px;
+}
+
+.buttonAceptar{
+    margin-top:40px
+}
+

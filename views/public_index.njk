@@ -1,0 +1,44 @@
+{% extends "public_base.njk" %}
+
+{% block titulo %}Películas | Listado{% endblock %}
+
+{% block contenido %}
+
+    <h1>Listado de películas</h1>
+    <table width="100%">
+        <tr>
+            <td >
+                <form action="/public/buscar/titulo" method="get">
+                    <div class="form-group">
+                        <label for="titulo">Titulo:</label>
+                        <input type="text" id="titulo" class="form-control" name="titulo"
+                            placeholder="Burcar película..."  />
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonAceptar">
+                        Buscar
+                    </button>
+                </form>
+            </td>
+
+            <td >
+                {% for pelicula in peliculas %}
+                    <tr>
+                        <p>
+                        {% if loop.index % 2 == 0 %}
+                            <td class="par">{{ pelicula.titulo }}</td>
+                        {% else %}
+                            <td class="impar">{{ pelicula.titulo }}</td>
+                        {% endif %}
+                        </p>
+                        <td>
+                            <a class="btn btn-success" href="/pelicula/{{ pelicula.id }}">Ver ficha</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td>No hay pelicula que mostrar.</td></tr>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}
