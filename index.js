@@ -13,7 +13,7 @@ const session = require('express-session');
 
 /**Conectar con una base de datos */
 mongoose.connect(
-    'mongodb://localhost:27017/FilmEsV3',
+    'mongodb://51.254.124.54:27017/FilmEsV3',
     {useNewUrlParser:true, useUnifiedTopology:true}
 );
 /**Recoger express en una variable */
